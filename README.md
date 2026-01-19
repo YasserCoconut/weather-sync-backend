@@ -9,7 +9,7 @@ Weather synchronization runs **asynchronously** using **Celery + Redis**, includ
 
 > **Note:** This project uses PostgreSQL and Redis by default.
 
-> **Prerequisites:** Docker must be running and a `.env` file must be created (see Environment Variables below) before executing the commands.
+> **Prerequisites:** Docker must be running, and the required environment variables must be set in your shell (see “Environment Variables” section).
 
 
 ### Linux / macOS
@@ -65,24 +65,23 @@ GET http://127.0.0.1:8000/api/weather/
 
 ## Environment Variables
 
-Create a `.env` file (not committed) based on `.env.example`.
+This project reads configuration **only from OS environment variables** (no `.env` file).
 
-### `.env.example`
+Required variables:
 
-```env
+```
 DJANGO_SECRET_KEY=replace_me
 DJANGO_DEBUG=1
 
-# Database
 POSTGRES_DB=weatherdb
 POSTGRES_USER=weatheruser
 POSTGRES_PASSWORD=weatherpass
 POSTGRES_HOST=127.0.0.1
 POSTGRES_PORT=5433
 
-# Celery / Redis
 REDIS_URL=redis://127.0.0.1:6379/0
 ```
+
 ---
 
 ## Local Setup (Python environment)
@@ -92,7 +91,6 @@ REDIS_URL=redis://127.0.0.1:6379/0
 ```bash
 python -m venv .venv
 ```
-
 Activate:
 
 **Windows (PowerShell)**
@@ -117,11 +115,41 @@ pip install -r requirements.txt
 
 ### 2) Configure environment
 
+### Linux / macOS (bash/zsh)
+
 ```bash
-copy .env.example .env   # Windows
+export DJANGO_SECRET_KEY="replace_me"
+export DJANGO_DEBUG="1"
+
+export POSTGRES_DB="weatherdb"
+export POSTGRES_USER="weatheruser"
+export POSTGRES_PASSWORD="weatherpass"
+export POSTGRES_HOST="127.0.0.1"
+export POSTGRES_PORT="5433"
+
+export REDIS_URL="redis://127.0.0.1:6379/0"
 ```
 
-Edit `.env` with appropriate values.
+### Windows (PowerShell)
+
+```powershell
+$env:DJANGO_SECRET_KEY = "replace_me"
+$env:DJANGO_DEBUG = "1"
+
+$env:POSTGRES_DB = "weatherdb"
+$env:POSTGRES_USER = "weatheruser"
+$env:POSTGRES_PASSWORD = "weatherpass"
+$env:POSTGRES_HOST = "127.0.0.1"
+$env:POSTGRES_PORT = "5433"
+
+$env:REDIS_URL = "redis://127.0.0.1:6379/0"
+```
+
+> Notes:
+> 
+> * These environment variables must be set in the terminal session where you run Django/Celery.
+> * When using `docker compose`, the default DB credentials/ports match the values above.
+
 
 ---
 
@@ -295,7 +323,6 @@ weather/
 ├─ views.py
 ├─ tests.py
 docker-compose.yml
-.env.example
 .gitignore
 ```
 

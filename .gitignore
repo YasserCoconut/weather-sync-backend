@@ -8,13 +8,10 @@ __pycache__/
 .venv/
 venv/
 
-# Environment variables
-.env
-
 # Django
 db.sqlite3
 *.log
-
+    
 # OS / Editor
 .DS_Store
 .vscode/
