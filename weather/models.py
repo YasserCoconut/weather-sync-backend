@@ -7,8 +7,8 @@ class Weather(models.Model):
     temperature = models.FloatField(null=True, blank=True)
     windspeed = models.FloatField(null=True, blank=True)
     winddirection = models.FloatField(null=True, blank=True)
-    weathercode = models.FloatField(null=True, blank=True)
-    time = models.CharField(max_length=50, null=True, blank=True)
+    weathercode = models.IntegerField(null=True, blank=True)
+    time = models.DateTimeField(null=True, blank=True)
 
     raw_payload = models.JSONField(null=True, blank=True)
     synced_at = models.DateTimeField(null=True, blank=True)

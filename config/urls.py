@@ -23,4 +23,5 @@ urlpatterns = [
     path("api/weather/", views.weather_list),
     path("api/weather/<int:id>/", views.weather_detail),
     path("api/sync/", views.sync_weather),
+    path("api/csrf/", views.csrf_token),
 ]
